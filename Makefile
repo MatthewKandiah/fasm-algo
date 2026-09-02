@@ -10,5 +10,5 @@ clean:
 hello.bin: hello/main.asm
 	fasm $< $@
 
-insertion-sort.bin: insertion-sort/main.asm insertion-sort/data.txt
+insertion-sort.bin: insertion-sort/main.asm $(wildcard insertion-sort/data*.txt)
 	fasm $< $@
