@@ -1,9 +1,11 @@
 	format ELF64 executable 3
+	entry _start
 
 	include '../shared/common.inc'
 	
 	segment readable executable
-	
+
+_start:
 	PRINT orig, orig_size
 	PRINT nums, nums_size
 	ARG1 nums
