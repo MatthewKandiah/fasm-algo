@@ -1,10 +1,10 @@
-	format ELF64 executable 3
-	entry _start
-
-	include '../shared/common.inc'
+format ELF64 executable 3
+entry _start
 	
-	segment readable executable
-
+include '../shared/common.inc'
+	
+segment readable executable
+	
 _start:
 	PRINT orig, orig_size
 	PRINT nums, nums_size
@@ -13,7 +13,7 @@ _start:
 	call do_sort
 	PRINT sort, sort_size
 	PRINT nums, nums_size
-
+	
 	PRINT orig, orig_size
 	PRINT nums2, nums2_size
 	ARG1 nums2
@@ -23,19 +23,19 @@ _start:
 	PRINT nums2, nums2_size
 	
 	EXIT 0
-
+	
 do_sort:
-	;; rdi: nums
-	;; rsi: nums_size
-	;; r8 = j
-	;; r9 = key
-	;; r10 = i
+;; rdi: nums
+;; rsi: nums_size
+;; r8 = j
+;; r9 = key
+;; r10 = i
 	mov r8, 1
 	dec rsi
 .begin:
 	cmp r8, rsi
 	jge .stop
-
+	
 	movzx r9, byte [rdi + r8]
 	mov r10, r8
 	dec r10
@@ -55,8 +55,8 @@ do_sort:
 .stop:
 	ret
 	
-	segment readable writable
-
+segment readable writable
+	
 	orig db 'original:',0xA
 	orig_size = $-orig
 	sort db 'sorted:',0xA
