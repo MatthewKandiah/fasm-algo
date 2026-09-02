@@ -1,18 +1,11 @@
 	format ELF64 executable 3
 
+	include '../shared/common.inc'
+	
 	segment readable executable
 	
-	;; print original values
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, orig
-	mov rdx, orig_size
-	syscall
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, nums
-	mov rdx, nums_size
-	syscall
+	PRINT orig, orig_size
+	PRINT nums, nums_size
 
 	;; sort in place
 	;; rbx = j
@@ -37,23 +30,10 @@ insert:	mov byte [nums + rdx + 1], cl
 	inc rbx
 	jmp begin
 	
-	;; print sorted values
-stop:	mov rax, 1		
-	mov rdi, 1
-	mov rsi, sort
-	mov rdx, sort_size
-	syscall
-	mov rax, 1
-	mov rdi, 1
-	mov rsi, nums
-	mov rdx, nums_size
-	syscall
+stop:	PRINT sort, sort_size
+	PRINT nums, nums_size
 
-exit:	mov rax, 60
-	mov rdi, 0
-	syscall
-
-
+exit:	EXIT 0
 	
 	segment readable writable
 
