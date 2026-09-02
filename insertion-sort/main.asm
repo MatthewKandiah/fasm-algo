@@ -2,10 +2,20 @@ format ELF64 executable 3
 entry _start
 	
 include '../shared/common.inc'
+include '../shared/uint64.inc'
 	
 segment readable executable
 	
 _start:
+	;; temporary - just testing my uint parsing
+	ARG1 nums
+	ARG2 5
+	call parse_uint64
+	cmp rax, 73910
+	jne .skip
+	EXIT 0
+.skip:
+	;; exits here if it is working, else continues with the normal program
 	PRINT orig, orig_size
 	PRINT nums, nums_size
 	ARG1 nums
