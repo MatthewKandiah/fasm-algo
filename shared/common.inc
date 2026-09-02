@@ -23,3 +23,27 @@ macro EXIT code {
 	mov rdi, code
 	syscall
 }
+
+macro ARG1 value {
+    mov rdi, value
+}
+
+macro ARG2 value {
+    mov rsi, value
+}
+
+macro ARG3 value {
+    mov rdx, value
+}
+
+macro ARG4 value {
+    mov rcx, value
+}
+
+macro ARG5 value {
+    mov r8, value
+}
+
+macro ARG6 value {
+    mov r9, value
+}
