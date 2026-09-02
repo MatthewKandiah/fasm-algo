@@ -14,32 +14,31 @@
 
 	EXIT 0
 
-;; TODO use caller-saved registers
 do_sort:
 	;; sort in place
-	;; rbx = j
-	;; rcx = key
-	;; rdx = i
-	mov rbx, 1
+	;; r8 = j
+	;; r9 = key
+	;; r10 = i
+	mov r8, 1
 .begin:
-	cmp rbx, nums_size-1
+	cmp r8, nums_size-1
 	jge .stop
 
-	movzx rcx, byte [nums + rbx]
-	mov rdx, rbx
-	dec rdx
+	movzx r9, byte [nums + r8]
+	mov r10, r8
+	dec r10
 .inner:
-	cmp rdx, 0
+	cmp r10, 0
 	jl .insert
-	cmp byte [nums + rdx], cl
+	cmp byte [nums + r10], r9b
 	jle .insert
-	mov al, byte [nums + rdx]
-	mov byte [nums + rdx + 1], al
-	dec rdx
+	mov al, byte [nums + r10]
+	mov byte [nums + r10 + 1], al
+	dec r10
 	jmp .inner
 .insert:
-	mov byte [nums + rdx + 1], cl
-	inc rbx
+	mov byte [nums + r10 + 1], r9b
+	inc r8
 	jmp .begin
 .stop:
 	ret
