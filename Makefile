@@ -7,6 +7,8 @@ all: \
 clean:
 	find . -type f -name '*.bin' -delete
 	find . -type f -name '*.o' -delete
+	find . -type f -name '*.fas' -delete
+	find . -type f -name '*.elf' -delete
 
 bin/hello.bin: hello/main.asm $(wildcard shared/*)
 	fasm -s bin/hello.fas $< $@
