@@ -1,14 +1,17 @@
 .PHONY: all
 all: \
-	hello.bin \
-	insertion-sort.bin
+	bin/hello.bin \
+	bin/insertion-sort.bin
 
 .PHONY: clean
 clean:
 	find . -type f -name '*.bin' -delete
+	find . -type f -name '*.o' -delete
 
-hello.bin: hello/main.asm $(wildcard shared/*)
-	fasm $< $@
+bin/hello.bin: hello/main.asm $(wildcard shared/*)
+	fasm -s bin/hello.fas $< $@
+	python3 fas_to_elf_dbg.py bin/hello.fas -o bin/hello.dbg.elf
 
-insertion-sort.bin: insertion-sort/main.asm $(wildcard insertion-sort/data*.txt) $(wildcard shared/*)
-	fasm $< $@
+bin/insertion-sort.bin: insertion-sort/main.asm $(wildcard insertion-sort/data*.txt) $(wildcard shared/*)
+	fasm -s bin/insertion-sort.fas $< $@
+	python3 fas_to_elf_dbg.py bin/insertion-sort.fas -o bin/insertion-sort.dbg.elf

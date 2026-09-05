@@ -1,7 +1,7 @@
-	format ELF64 executable 3
+format ELF64 executable 3
 
-	segment readable executable
-
+segment readable executable
+_start:
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, msg
@@ -12,7 +12,6 @@
 	mov rdi, 0
 	syscall
 
-	segment readable writable
-
+segment readable writable
 	msg db "hello world", 10
 	msg_size = $-msg

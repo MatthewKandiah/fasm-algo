@@ -7,7 +7,7 @@ include '../shared/uint64.inc'
 segment readable executable
 	
 _start:
-	int3
+	;int3
 	;; temporary - just testing my uint parsing
 	ARG1 nums
 	ARG2 5
